@@ -1,0 +1,64 @@
+
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Insert one number to Search for client"
+          [(ngModel)]="txtClientName"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchName()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Client list</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let client of currentIndex; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveClient(client)"
+        >
+          {{ client.name }}
+        </li>
+      </ul>
+  
+      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllClients()">
+        Remove All
+      </button>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentClient">
+        <h4>Client</h4>
+        <div>
+          <label><strong>Name:</strong></label> {{ currentIndex.Name }}
+        </div>
+        <div>
+          <label><strong>Surname:</strong></label>
+          {{ currentIndex.Surname }}
+        </div>
+        <div>
+          <label><strong>Status:</strong></label>
+          {{ currentIndex.published ? "Published" : "Pending" }}
+        </div>
+  
+        <a class="badge badge-warning" routerLink="/clients/{{ currentClient}}">
+          Edit
+        </a>
+      </div>
+  
+      <div *ngIf="!currentClient">
+        <br />
+        <p>Please click on a Client...</p>
+      </div>
+    </div>
+  </div>
